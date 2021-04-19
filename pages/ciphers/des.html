@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DES</title>
+	<link rel="icon" type="text/css" href="../../favicon.svg">
+	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/pages.css">
+	<script type="text/javascript" src="../../js/jquery.min.js">
+	</script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js">
+	</script>
+	<script type="text/javascript" src="../../js/jquery.qrcode.min.js">
+	</script>
+	<script type="text/javascript" src="../../js/crypto-js.min.js">
+	</script>
+	<script type="text/javascript" src="../../js/clipboard.min.js">
+	</script>
+	<style>		
+		.vertical-center {
+		  			min-height: 100%;
+		  			min-height: 100vh;
+		  			display: flex;
+		  			align-items: center;
+		}
+		
+		.container {
+			padding-top: 15px;
+			
+		}
+	</style>
+</head>
+<body onload="startFunction();">
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light shadow-sm rounded">
+	<svg xmlns="http://www.w3.org/2000/svg" width="50" height="39" fill="currentColor" class="bi bi-file-earmark-lock-fill" viewBox="0 0 16 16">
+  		<path d="M7 7a1 1 0 0 1 2 0v1H7V7zM6 9.3c0-.042.02-.107.105-.175A.637.637 0 0 1 6.5 9h3a.64.64 0 0 1 .395.125c.085.068.105.133.105.175v2.4c0 .042-.02.107-.105.175A.637.637 0 0 1 9.5 12h-3a.637.637 0 0 1-.395-.125C6.02 11.807 6 11.742 6 11.7V9.3z"/>
+  		<path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0z"/>
+	</svg>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"> <a class="nav-link" href="../intro.html">INTRO</a></li>
+			<li class="nav-item"> <a class="nav-link" href="../ciphers/aes.html">AES</a></li>
+			<li class="nav-item active"> <a class="nav-link" href="../ciphers/des.html">DES<span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"> <a class="nav-link" href="../ciphers/rabbit.html">Rabbit</a></li>
+			<li class="nav-item"> <a class="nav-link" href="../ciphers/triple_des.html">TripleDES</a></li>
+			<li class="nav-item"> <a class="nav-link" href="../hashing/hash.html">Hashing</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="vertical-center">
+	<div class="container rounded shadow">
+		<div class="row" id="dInputList">
+			<div class="col">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Message</span> 
+					</div>
+					<input type="text" class="form-control" id="iText">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" id="paste" type="button" onclick="pasteText();"> Paste </button> 
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Passphrase</span> 
+					</div>
+					<input type="password" class="form-control" id="pPassphrase">
+					<div class="input-group-append">
+						<button class="btn btn-outline-primary" id="encrypt" type="button" onclick="handleText(this);"> Encrypt </button> <button class="btn btn-outline-success" id="decrypt" type="button" onclick="handleText(this);"> Decrypt </button> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="dResultArea">
+			<div class="col">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="sResult"> <br>
+						Result <br>
+						( UTF-8 ) <br>
+						</span> 
+					</div>
+					<textarea class="form-control" id="rTA" readonly data-clipboard-action="copy" data-clipboard-target="#rTA" style="cursor: copy; height: 430px;">
+				</textarea>
+					<div class="input-group-append" style="height: 430px; background-color: #e9ecef;">
+						<div id="dQR">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function startFunction(){
+		prependLabel();
+		getQR("");
+		new Clipboard("#paste");
+		new Clipboard("textarea");
+	}
+	
+	function getTitle(){
+		return document.title.toString();	
+	}
+	
+	function getText(){
+		const t = $("#iText");
+		return t.val();
+	}
+	
+	function getPassphare(){
+		const p = $("#pPassphrase");
+		return p.val();
+	}
+	
+	function handleText(item){
+		const t = getText();
+		const p = getPassphare();
+		const r = $("#rTA");
+		const c = getTitle();
+		const m = item.id;
+		var e = CryptoJS[c][m](t, p);
+		if(m === "decrypt"){
+			e = e.toString(CryptoJS.enc.Utf8);
+		}
+		r.text(e);
+		getQR(r.text());
+	}
+		
+	function prependLabel(){
+		const s = $("#sResult");
+		s.prepend(getTitle());
+	}
+	
+	function getQR(text){
+		$("#dQR").empty();
+		jQuery("#dQR").qrcode({
+				width: 430,
+				height: 430,
+				background: "#e9ecef",
+	    		text: text
+		});
+	}
+	
+	async function pasteText() {
+	  		const t = await navigator.clipboard.readText();
+	  		$("#iText").val(t);
+	}
+</script>
+</body>
+</html>

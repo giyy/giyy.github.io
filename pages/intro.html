@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduction</title>
+	<link rel="icon" type="text/css" href="../favicon.svg">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/pages.css">
+	<script type="text/javascript" src="../js/jquery.min.js">
+	</script>
+	<script type="text/javascript" src="../js/bootstrap.min.js">
+	</script>
+	<script type="text/javascript" src="../js/jquery.qrcode.min.js">
+	</script>
+	<script type="text/javascript" src="../js/crypto-js.min.js">
+	</script>
+	<script type="text/javascript" src="../js/clipboard.min.js">
+	</script>
+	<style>		
+		.container {
+			margin-top: 80px;
+		}
+	</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light shadow-sm rounded">
+	<svg xmlns="http://www.w3.org/2000/svg" width="50" height="39" fill="currentColor" class="bi bi-file-earmark-lock-fill" viewBox="0 0 16 16">
+  		<path d="M7 7a1 1 0 0 1 2 0v1H7V7zM6 9.3c0-.042.02-.107.105-.175A.637.637 0 0 1 6.5 9h3a.64.64 0 0 1 .395.125c.085.068.105.133.105.175v2.4c0 .042-.02.107-.105.175A.637.637 0 0 1 9.5 12h-3a.637.637 0 0 1-.395-.125C6.02 11.807 6 11.742 6 11.7V9.3z"/>
+  		<path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0z"/>
+	</svg>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"> <a class="nav-link" href="./intro.html">INTRO<span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"> <a class="nav-link" href="./ciphers/aes.html">AES</a></li>
+			<li class="nav-item"> <a class="nav-link" href="./ciphers/des.html">DES</a></li>
+			<li class="nav-item"> <a class="nav-link" href="./ciphers/rabbit.html">Rabbit</a></li>
+			<li class="nav-item"> <a class="nav-link" href="./ciphers/triple_des.html">TripleDES</a></li>
+			<li class="nav-item"> <a class="nav-link" href="./hashing/hash.html">Hashing</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="card">
+				<h5 class="card-header">
+					Symmetric-key algorithm 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						Symmetric-key algorithms are algorithms for cryptography that use the same cryptographic keys for both the encryption of plaintext and the decryption of ciphertext. The keys may be identical, or there may be a simple transformation to go between the two keys. The keys, in practice, represent a shared secret between two or more parties that can be used to maintain a private information link. The requirement that both parties have access to the secret key is one of the main drawbacks of symmetric-key encryption, in comparison to public-key encryption (also known as asymmetric-key encryption). 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					AES - (Advanced Encryption Standard) 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						The Advanced Encryption Standard (AES), also known by its original name Rijndael is a specification for the encryption of electronic data established by the U.S. National Institute of Standards and Technology (NIST) in 2001. 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					DES - (The Data Encryption Standard) 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						The Data Encryption Standard (DES) is a symmetric-key algorithm for the encryption of digital data. Although its short key length of 56 bits makes it too insecure for applications, it has been highly influential in the advancement of cryptography. 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Data_Encryption_Standard" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					Rabbit 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						Rabbit is a high-speed stream cipher from 2003. A symmetric key cipher where plaintext digits are combined with a pseudorandom cipher digit stream (keystream). In a stream cipher, each plaintext digit is encrypted one at a time with the corresponding digit of the keystream, to give a digit of the ciphertext stream. Since encryption of each digit is dependent on the current state of the cipher, it is also known as state cipher. In practice, a digit is typically a bit and the combining operation is an exclusive-or (XOR). 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Rabbit_(cipher)" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					Triple DES 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						Triple DES (3DES or TDES), officially the Triple Data Encryption Algorithm (TDEA or Triple DEA), is a symmetric-key block cipher, which applies the DES cipher algorithm three times to each data block. The Data Encryption Standard's (DES) 56-bit key is no longer considered adequate in the face of modern cryptanalytic techniques and supercomputing power. However, an adapted version of DES, Triple DES (3DES), uses the same algorithm to produce a more secure encryption. 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Triple_DES" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					Public-key cryptography | Asymmetric cryptography 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						Public-key cryptography, or asymmetric cryptography, is a cryptographic system which uses pairs of keys: public keys (which may be known to others), and private keys (which may never be known by any except the owner). The generation of such key pairs depends on cryptographic algorithms which are based on mathematical problems termed one-way functions. Effective security requires keeping the private key private; the public key can be openly distributed without compromising security. 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Public-key_cryptography" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					RSA - (Rivest-Shamir-Adleman) 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						RSA is a public-key cryptosystem that is widely used for secure data transmission. It is also one of the oldest. The acronym RSA comes from the surnames of Ron Rivest, Adi Shamir, and Leonard Adleman, who publicly described the algorithm in 1977. An equivalent system was developed secretly, in 1973 at GCHQ (the British signals intelligence agency), by the English mathematician Clifford Cocks. That system was declassified in 1997. 
+					</p>
+					<br>
+					<a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					ECC - (Elliptic-curve cryptography) 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						ECC is an approach to public-key cryptography based on the algebraic structure of elliptic curves over finite fields. ECC allows smaller keys compared to non-EC cryptography (based on plain Galois fields) to provide equivalent security. Elliptic curves are applicable for key agreement, digital signatures, pseudo-random generators and other tasks. Indirectly, they can be used for encryption by combining the key agreement with a symmetric encryption scheme. 
+					</p>
+					<a href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					PGP - (Pretty Good Privacy) 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						PGP is an encryption program that provides cryptographic privacy and authentication for data communication. PGP is used for signing, encrypting, and decrypting texts, e-mails, files, directories, and whole disk partitions and to increase the security of e-mail communications. Phil Zimmermann developed PGP in 1991. 
+					</p>
+					<br>
+					<a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy" class="btn btn-info">More Wikipedia</a> 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					OpenPGP 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						OpenPGP is the most widely used email encryption standard. It is defined by the OpenPGP Working Group of the Internet Engineering Task Force (IETF) as a Proposed Standard in RFC 4880. OpenPGP was originally derived from the PGP software, created by Phil Zimmermann. 
+					</p>
+					<br>
+					<a href="https://www.openpgp.org" class="btn btn-info">More Details</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					OpenPGP.js 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						OpenPGP.js project aims to provide an Open Source OpenPGP library in JavaScript so it can be used on virtually every device. Instead of other implementations that are aimed at using native code, OpenPGP.js is meant to bypass this requirement (i.e. people will not have to install gpg on their machines in order to use the library). The idea is to implement all the needed OpenPGP functionality in a JavaScript library that can be reused in other projects that provide browser extensions or server applications. It should allow you to sign, encrypt, decrypt, and verify any kind of text - in particular e-mails - as well as managing keys. 
+					</p>
+					<br>
+					<a href="https://openpgpjs.org" class="btn btn-info">More Details</a> 
+				</div>
+			</div>
+			<br>
+			<div class="card">
+				<h5 class="card-header">
+					Bootstrap 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						The world's most popular framework for building responsive, mobile-first sites, with jsDelivr and a template starter page. 
+					</p>
+					<a href="https://getbootstrap.com/docs/5.0/getting-started/introduction" class="btn btn-info">More Details</a> 
+				</div>
+			</div>
+		</div>
+		<div class="col-sm">
+			<div class="card">
+				<h5 class="card-header">
+					CryptoJS 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						CryptoJS is a growing collection of standard and secure cryptographic algorithms implemented in JavaScript using best practices and patterns. They are fast, and they have a consistent and simple interface. 
+					</p>
+					<a href="https://cryptojs.gitbook.io/docs" class="btn btn-info">More Details</a> 
+				</div>
+			</div>
+			<br>
+			<div class="card">
+				<h5 class="card-header">
+					jQuery 
+				</h5>
+				<div class="card-body">
+					<p class="card-text">
+						jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript. 
+					</p>
+					<a href="https://jquery.com" class="btn btn-info">More Details</a> 
+				</div>
+			</div>
+			<br>
+			<div class="card">
+				<h5 class="card-header">
+					Secret Secrecy: nothing to introduce. <a href="" class="link-info">Top</a> 
+				</h5>
+			</div>
+		</div>
+	</div>
+	<br>
+</div>
+</body>
+</html>
