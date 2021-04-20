@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>RSA</title>
+	<title>Decrypt</title>
 	<link rel="icon" type="text/css" href="../../favicon.svg">
 	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 	<script type="text/javascript" src="../../js/jquery.min.js">
@@ -49,32 +49,28 @@
 			<li class="nav-item"> <a class="nav-link" href="../ciphers/des.html">DES</a></li>
 			<li class="nav-item"> <a class="nav-link" href="../ciphers/rabbit.html">Rabbit</a></li>
 			<li class="nav-item"> <a class="nav-link" href="../ciphers/triple_des.html">TripleDES</a></li>
-			<li class="nav-item active"> <a class="nav-link" href="../openpgp/rsa.html">RSA<span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"> <a class="nav-link" href="../openpgp/rsa.html">RSA</a></li>
 			<li class="nav-item"> <a class="nav-link" href="../openpgp/encrypt.html">Encrypt</a></li>
-			<li class="nav-item"> <a class="nav-link" href="../openpgp/decrypt.html">Decrypt</a></li>
+			<li class="nav-item active"> <a class="nav-link" href="../openpgp/decrypt.html">Decrypt<span class="sr-only">(current)</span></a></li>
 			<li class="nav-item"> <a class="nav-link" href="../openpgp/ecc.html">ECC</a></li>
 			<li class="nav-item"> <a class="nav-link" href="../hashing/hash.html">Hashing</a></li>
 		</ul>
 	</div>
 </nav>
-
 <div class="vertical-center">
 	<div class="container rounded shadow">
 		<div class="row" id="dInputList">
 			<div class="col">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text">Email Address</span> 
+						<span class="input-group-text">Key Private&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
 					</div>
-					<input type="email" class="form-control" id="eEmail">
+					<input type="text" class="form-control" id="kPri" placeholder="For decryption">
 				</div>
 			</div>
 			<div class="col">
 				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">User&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-					</div>
-					<input type="text" class="form-control" id="iUser">
+					<button class="btn btn-outline-success btn-block" id="iDecrypt" type="button" onclick="decryptText();">RSA Decrypt</button> 
 				</div>
 			</div>
 		</div>
@@ -82,24 +78,17 @@
 			<div class="col">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text">Passphrase&nbsp;&nbsp; &nbsp;</span> 
+						<span class="input-group-text">Passphrase&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
 					</div>
-					<input type="password" class="form-control" id="pPassphrase">
+					<input type="password" class="form-control" id="pPassphrase" placeholder="For private key decrypt">
 				</div>
 			</div>
 			<div class="col">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text">Bits &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+						<span class="input-group-text">Key Public&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
 					</div>
-					<select class="form-control" id="sltType">
-						<option value="2048">2048</option>
-						<option value="4096">4096</option>
-						<option value="8192">8192</option>
-					</select>
-					<div class="input-group-append">
-						<button class="btn btn-outline-secondary" id="generate" type="button" onclick="generateKey();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-					</div>
+					<input type="text" class="form-control" id="kPub" placeholder="For verification (optional)">
 				</div>
 			</div>
 		</div>
@@ -107,47 +96,62 @@
 			<div class="col">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text">RSA Key <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Private&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+						<span class="input-group-text">Encrypted <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
 					</div>
-					<textarea class="form-control" id="kpriTA" readonly data-clipboard-action="copy" data-clipboard-target="#kpriTA" style="height: 372px; cursor: copy"></textarea>
+					<textarea class="form-control" id="mTA" style="height: 372px;" placeholder="-----BEGIN PGP MESSAGE-----"></textarea>
 				</div>
 			</div>
 			<div class="col">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text">RSA Key <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Public&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+						<span class="input-group-text">Decrypted <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
 					</div>
-					<textarea class="form-control" id="kpubTA" readonly data-clipboard-action="copy" data-clipboard-target="#kpubTA" style="height: 372px; cursor: copy"></textarea>
+					<textarea class="form-control" id="emTA" readonly data-clipboard-action="copy" data-clipboard-target="#emTA" style="height: 372px; cursor: copy"></textarea>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+
 <script type="text/javascript">
 
 	function startFunction(){
 		new Clipboard("textarea");
 	}
+	
+ 	function reformat(t, c){
+		const b = "-----BEGIN PGP " + t + "-----  ";
+		const e = "-----END PGP " + t + "-----";
+		const p = c.replace(b, "").replace(e, "").replace(/ /g, "\n\r");
+		const r = b +"\r\n\r\n" + p + e;
 
-	async function generateKey(){
-		
-		const s = $("#sltType").val();
-		const n = $("#iUser").val();
-		const e = $("#eEmail").val();
-		const p = $("#pPassphrase").val();
-		$("#kpriTA").text("Private Key bits: (" + s + ") generating...");
-		$("#kpubTA").text("Public Key bits: (" + s + ") generating...");
-		const {privateKeyArmored, publicKeyArmored} = await openpgp.generateKey({
-			type: "rsa",
-			rsaBits: s,
-			userIds: [{ name: n, email: e}],
-			passphrase: p
-		});
-		$("#kpriTA").text(privateKeyArmored);
-		$("#kpubTA").text(publicKeyArmored);
+		return r;
 	}
+	
+	async function decryptText(){
 		
+		const privateKeyArmored = reformat("PRIVATE KEY BLOCK", $("#kPri").val());
+		const publicKeyArmored = reformat("PUBLIC KEY BLOCK", $("#kPub").val());
+		const pPassphrase = $("#pPassphrase").val();
+		const messageArmored = $("#mTA").val();
+
+		const privateKey = (await openpgp.key.readArmored(privateKeyArmored)).keys[0];
+		const publicKey = (await openpgp.key.readArmored(publicKeyArmored)).keys;
+		const message = await openpgp.message.readArmored(messageArmored);
+		if(pPassphrase.length != 0){
+			await privateKey.decrypt(pPassphrase);
+		}
+		const { data: decrypted, signatures } = await openpgp.decrypt({
+        		message: message,
+        		privateKeys: privateKey,
+        		publicKeys: publicKey	
+    		});
+    		
+		$("#emTA").text(decrypted);
+ 	}
 </script>
 </body>
 </html>
