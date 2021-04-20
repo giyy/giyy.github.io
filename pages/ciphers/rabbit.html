@@ -84,12 +84,14 @@
 					</div>
 					<textarea class="form-control" id="rTA" readonly data-clipboard-action="copy" data-clipboard-target="#rTA" style="cursor: copy; height: 430px;">
 				</textarea>
-					<div class="input-group-append" style="height: 430px; background-color: #e9ecef;">
-						<div id="dQR">
-						</div>
-					</div>
 				</div>
 			</div>
+			<div class="col">
+				<div class="input-group mb-3">
+					<div id="dQR" style="padding-left: 115px; padding-top: 80px;">
+					</div>
+				</div>
+			</div>			
 		</div>
 	</div>
 </div>
@@ -136,12 +138,7 @@
 	
 	function getQR(text){
 		$("#dQR").empty();
-		jQuery("#dQR").qrcode({
-				width: 430,
-				height: 430,
-				background: "#e9ecef",
-	    		text: text
-		});
+		jQuery("#dQR").qrcode(text);
 	}
 	
 	async function pasteText() {
