@@ -96,7 +96,7 @@
 			</div>
 			<div class="col">
 				<div class="input-group mb-3">
-					<div id="dQR" style="padding-left: 115px; padding-top: 80px;">
+					<div id="dQR" style="padding-left: 50px;">
 					</div>
 				</div>
 			</div>			
@@ -148,6 +148,8 @@
 		$("#dQR").empty();
 		jQuery("#dQR").qrcode({
 			text: text,
+			width: 430,
+			height: 430,
 			background: "rgba(0, 0, 0, 0)"
 		});
 	}
